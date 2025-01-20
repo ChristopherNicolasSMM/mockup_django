@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contas</title>
+</head>
+<body>
+    <h1>Lista de Contas</h1>
+    <ul>
+        {% for account in accounts %}
+            <li>
+                <a href="{{ account.id }}/">{{ account.name }}</a> - {{ account.balance }} - {{ account.status }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

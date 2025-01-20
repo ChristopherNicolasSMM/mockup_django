@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Contas Bancárias{% endblock %}
+{% block content %}
+
+
+
+
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+<section class="section dashboard">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Manutenção de Contas Bancárias</h5>
+            <table class="table datatable" id="contaBancoTableBody">
+                <thead>
+                    <tr>
+                        <th>Banco</th>
+                        <th>Descrição</th>
+                        <th>Conta</th>
+                        <th>Dígito</th>
+                        <th>Agência</th>
+                        <th>Documento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Cadastrar ou Modificar</h5>
+            <form method="POST" action="{% url 'salvar_conta_banco' %}">
+                {% csrf_token %}
+                <input type="hidden" id="inputContaBancoId" name="id">
+                <div>
+                    <label for="inputBanco" class="form-label">Banco</label>
+                    <input type="text" class="form-control" id="inputBanco" name="banco">
+                </div>
+                <div>
+                    <label for="inputDescricao" class="form-label">Descrição</label>
+                    <input type="text" class="form-control" id="inputDescricao" name="descricao">
+                </div>
+                <div>
+                    <label for="inputConta" class="form-label">Conta</label>
+                    <input type="text" class="form-control" id="inputConta" name="conta">
+                </div>
+                <div>
+                    <label for="inputDigito" class="form-label">Dígito</label>
+                    <input type="text" class="form-control" id="inputDigito" name="digito">
+                </div>
+                <div>
+                    <label for="inputAgencia" class="form-label">Agência</label>
+                    <input type="text" class="form-control" id="inputAgencia" name="agencia">
+                </div>
+                <div>
+                    <label for="inputPix" class="form-label">PIX</label>
+                    <input type="text" class="form-control" id="inputPix" name="pix">
+                </div>
+                <div>
+                    <label for="inputDocumento" class="form-label">Documento</label>
+                    <input type="text" class="form-control" id="inputDocumento" name="documento">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="inputCategoriaStatus"
+                        class="form-label">Status</label>
+                    <select id="inputStatus" class="form-select"
+                        name="status">
+                        <option value="True">Ativo</option>
+                        <option value="False">Inativo</option>
+                    </select>
+                </div>
+
+            </br>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("{% url 'consultar_contas_banco' %}")
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#contaBancoTableBody tbody");
+                data.contas.forEach(conta => {
+                    //console.log(conta);
+                    const row = `
+                        <tr data-id="${ conta.id }">
+                            <td>${conta.banco}</td>
+                            <td>${conta.descricao}</td>
+                            <td>${conta.conta}</td>
+                            <td>${conta.digito}</td>
+                            <td>${conta.agencia}</td>
+                            <td>${conta.documento}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="editContaBanco(this)">Editar</button>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            });
+    });
+
+function editContaBanco(button) {
+    const row = button.closest("tr");
+    const id = row.dataset.id; // Obter o ID do atributo data-id
+
+    if (!id) {
+        console.error("ID não encontrado para a linha selecionada.");
+        return;
+    }
+
+    // Fazer uma requisição para buscar os dados pelo ID
+    fetch(`/consultar-conta-banco/${id}/`) // URL que fará a busca pelo ID
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro ao buscar os dados da conta bancária.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Preencher os campos do formulário com os dados retornados
+            document.getElementById("inputContaBancoId").value = data.id || ""; 
+            document.getElementById("inputBanco").value = data.banco || "";
+            document.getElementById("inputDescricao").value = data.descricao || "";
+            document.getElementById("inputConta").value = data.conta || "";
+            document.getElementById("inputDigito").value = data.digito || "";
+            document.getElementById("inputAgencia").value = data.agencia || "";
+            document.getElementById("inputPix").value = data.pix || "";
+            document.getElementById("inputDocumento").value = data.documento || "";
+            document.getElementById("inputStatus").value = data.status ? "True" : "False";
+        })
+        .catch(error => {
+            console.error("Erro ao buscar os dados da conta bancária:", error);
+        });
+}
+
+</script>
+
+{% endblock %}

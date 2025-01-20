@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+
+<section class="section dashboard">
+    <div class="row">
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+            <div class="row">
+
+
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Lançamento de Movimentações</h5>
+        
+                      <!-- Bordered Tabs Justified -->
+                      <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                        <li class="nav-item flex-fill" role="presentation">
+                          <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="verPesquisar" aria-selected="true">Ver e Pesquisar</button>
+                        </li>
+
+                        <li class="nav-item flex-fill" role="presentation">
+                          <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="inserirModificar" aria-selected="false">Inserir / Modificar</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                        <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="verPesquisar-tab">
+                          
+
+
+
+
+
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">Use esta sessão para realizar seus lançamentos, manutenções e ajustes necessários</h5>
+                                  <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+                    
+                                  <!-- Table with stripped rows -->
+                                  <table class="table datatable">
+                                    <thead>
+                                      <tr>
+                                        <th>
+                                          <b>N</b>ame
+                                        </th>
+                                        <th>Ext.</th>
+                                        <th>City</th>
+                                        <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
+                                        <th>Completion</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>Unity Pugh</td>
+                                        <td>9958</td>
+                                        <td>Curicó</td>
+                                        <td>2005/02/11</td>
+                                        <td>37%</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Theodore Duran</td>
+                                        <td>8971</td>
+                                        <td>Dhanbad</td>
+                                        <td>1999/04/07</td>
+                                        <td>97%</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Kylie Bishop</td>
+                                        <td>3147</td>
+                                        <td>Norman</td>
+                                        <td>2005/09/08</td>
+                                        <td>63%</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <!-- End Table with stripped rows -->
+                    
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="inserirModificar-tab">
+                          
+                            
+
+
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">Multi Columns Form</h5>
+                    
+                                  <!-- Multi Columns Form -->
+                                  <form class="row g-3">
+                                    <div class="col-md-12">
+                                      <label for="inputName5" class="form-label">Your Name</label>
+                                      <input type="text" class="form-control" id="inputName5">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="inputEmail5" class="form-label">Email</label>
+                                      <input type="email" class="form-control" id="inputEmail5">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="inputPassword5" class="form-label">Password</label>
+                                      <input type="password" class="form-control" id="inputPassword5">
+                                    </div>
+                                    <div class="col-12">
+                                      <label for="inputAddress5" class="form-label">Address</label>
+                                      <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St">
+                                    </div>
+                                    <div class="col-12">
+                                      <label for="inputAddress2" class="form-label">Address 2</label>
+                                      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="inputCity" class="form-label">City</label>
+                                      <input type="text" class="form-control" id="inputCity">
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label for="inputState" class="form-label">State</label>
+                                      <select id="inputState" class="form-select">
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label for="inputZip" class="form-label">Zip</label>
+                                      <input type="text" class="form-control" id="inputZip">
+                                    </div>
+                                    <div class="col-12">
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                                        <label class="form-check-label" for="gridCheck">
+                                          Check me out
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="text-center">
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                      <button type="reset" class="btn btn-secondary">Reset</button>
+                                    </div>
+                                  </form><!-- End Multi Columns Form -->
+                    
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+                      </div><!-- End Bordered Tabs Justified -->
+        
+                    </div>
+                  </div>
+            </div>
+
+
+
+        </div><!-- End Left side columns -->
+    </div>
+</section>
+
+
+{% endblock %}

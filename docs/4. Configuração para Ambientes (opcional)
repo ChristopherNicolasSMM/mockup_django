@@ -1,0 +1,92 @@
+Entendido! No caso, como o arquivo de configurações está em `settings/base.py`, o Django precisa saber qual configuração usar. Isso pode ser especificado usando a variável de ambiente `DJANGO_SETTINGS_MODULE`.
+
+Por padrão, o Django tenta buscar um arquivo `settings.py` na raiz do projeto. Como você dividiu suas configurações, vamos ajustar o projeto para usar a estrutura correta.
+
+---
+
+### **1. Configurando o `DJANGO_SETTINGS_MODULE`**
+O arquivo `manage.py` e o `wsgi.py` (ou `asgi.py`) devem ser configurados para apontar para `settings/base.py`. Edite os dois arquivos e atualize a variável `DJANGO_SETTINGS_MODULE`.
+
+#### **`manage.py`**
+Certifique-se de que o `manage.py` está assim:
+```python
+#!/usr/bin/env python
+import os
+import sys
+
+def main():
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings.base')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError(
+            "Couldn't import Django. Are you sure it's installed and "
+            "available on your PYTHONPATH environment variable? Did you "
+            "forget to activate a virtual environment?"
+        ) from exc
+    execute_from_command_line(sys.argv)
+
+if __name__ == '__main__':
+    main()
+```
+
+#### **`wsgi.py`**
+O arquivo `wsgi.py` (ou `asgi.py`) também deve ser atualizado:
+```python
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings.base')
+
+application = get_wsgi_application()
+```
+
+---
+
+### **2. Certifique-se de que o `base.py` tem a configuração correta**
+No arquivo `settings/base.py`, a configuração de banco de dados deve estar configurada, como discutido anteriormente. Por exemplo:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Para SQLite
+    }
+}
+```
+
+---
+
+### **3. Executando o Projeto**
+Agora você pode executar os comandos do Django normalmente. Por exemplo:
+1. Para aplicar as migrações:
+   ```bash
+   python manage.py migrate
+   ```
+
+2. Para rodar o servidor de desenvolvimento:
+   ```bash
+   python manage.py runserver
+   ```
+
+---
+
+### **4. Configuração para Ambientes (opcional)**
+Se você planeja usar configurações diferentes para desenvolvimento e produção, poderá definir o módulo de configuração usando a variável de ambiente `DJANGO_SETTINGS_MODULE`. Por exemplo:
+- Para **desenvolvimento**, use `settings.development`.
+- Para **produção**, use `settings.production`.
+
+Exemplo de execução:
+```bash
+export DJANGO_SETTINGS_MODULE=myproject.settings.development
+python manage.py runserver
+```
+
+No Windows (PowerShell):
+```powershell
+$env:DJANGO_SETTINGS_MODULE="myproject.settings.development"
+python manage.py runserver
+```
+
+---
+
+Se ainda houver erros ou dúvidas, compartilhe os detalhes atualizados para que possamos ajustá-los.

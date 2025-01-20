@@ -1,0 +1,63 @@
+# Diretórios do Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.egg-info/
+*.egg
+
+# Diretórios de ambiente virtual
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.env
+
+# Arquivos de log e de debug
+*.log
+*.out
+*.err
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configurações do editor e IDE
+.vscode/
+.idea/
+*.swp
+
+# Arquivos de banco de dados
+*.sqlite3
+
+# Arquivos de migração do Django
+*/migrations/*
+
+# Arquivos estáticos e de mídia
+staticfiles/
+media/
+
+# Configuração específica de produção ou desenvolvimento
+local_settings.py
+settings_local.py
+.env
+
+# Arquivos gerados pelo Docker
+docker-compose.override.yml
+.dockerignore
+
+# Arquivos relacionados ao teste de cache
+*.cache
+
+# Compilados do front-end
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Configurações específicas de deploy
+*.bak
+*.backup
+*.zip
